@@ -13,4 +13,17 @@ class ArticlesController extends Controller
         $articles = Articles::all();
         return Inertia::render('Articles/Index', ['articles' => $articles]);
     }
+
+    public function create() 
+    {
+        return Inertia::render('Articles/Create');
+    }
+
+    public function store(Request $request) 
+    { 
+        $article = new Articles($request->all());
+        $article->save();
+        return redirect()->route('articles.index');
+        // form validation
+    }
 }
