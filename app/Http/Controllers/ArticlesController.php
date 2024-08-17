@@ -24,6 +24,13 @@ class ArticlesController extends Controller
         $article = new Articles($request->all());
         $article->save();
         return redirect()->route('articles.index');
-        // form validation
+        // TODO: form validation
+    }
+
+    public function destroy(Articles $article)
+    {
+        $article->delete();
+        return redirect()->route('articles.index');
+        // TODO: flash message
     }
 }

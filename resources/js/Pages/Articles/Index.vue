@@ -22,6 +22,9 @@
                                 <tr v-for="post in articles" :key="post.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">{{ post.title }}</td>
                                     <td class="px-6 py-4">{{ post.body }}</td>
+                                    <td class="px-6 py-4">
+                                        <button @click="deleteArticle(post.id)" class="p-1 bg-red-600 text-white rounded-sm hover:bg-red-800">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -40,7 +43,7 @@
 <script setup>
 import NavLink from '@/Components/NavLink.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     articles: {
@@ -49,5 +52,11 @@ defineProps({
     },
 });
 
-const headers = ["articles", "body"];
+const headers = ["articles", "body", "actions"];
+
+const form = useForm({});
+
+const deleteArticle = (id) => {
+    form.delete(`articles/${id}`);
+}
 </script>
