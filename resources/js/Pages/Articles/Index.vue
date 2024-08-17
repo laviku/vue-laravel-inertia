@@ -10,22 +10,25 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <table v-if="articles.length">
-                            <thead>
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mb-3" v-if="articles.length">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th v-for="header in headers" :key="header">
+                                    <th v-for="header in headers" :key="header" class="px-6 py-3">
                                         {{ header }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="post in articles" :key="post.id">
-                                    <td>{{ post.title }}</td>
-                                    <td>{{ post.body }}</td>
+                                <tr v-for="post in articles" :key="post.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">{{ post.title }}</td>
+                                    <td class="px-6 py-4">{{ post.body }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <hr/>
+
+                        <NavLink :href="route('articles.create')" :active="route().current('articles')">
+                            New Article
+                        </NavLink>
                     </div>
                 </div>
             </div>
