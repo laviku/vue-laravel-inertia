@@ -23,13 +23,16 @@
                                     <td class="px-6 py-4">{{ post.title }}</td>
                                     <td class="px-6 py-4">{{ post.body }}</td>
                                     <td class="px-6 py-4">
-                                        <button @click="deleteArticle(post.id)" class="p-1 bg-red-600 text-white rounded-sm hover:bg-red-800">Delete</button>
+                                        <button @click="deleteArticle(post.id)" class="p-1 bg-red-600 text-white rounded-sm hover:bg-red-800 mr-3">Delete</button>
+                                        <NavLink :href="`articles/${ post.id }/edit`" class="p-1 bg-cyan-600 text-white rounded-sm border-none hover:bg-cyan-800 hover:text-white">
+                                            Edit
+                                        </NavLink>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <NavLink :href="route('articles.create')" :active="route().current('articles')">
+                        <NavLink :href="route('articles.create')" class="p-1 bg-slate-600 text-white rounded-sm border-none hover:bg-slate-800 hover:text-white">
                             New Article
                         </NavLink>
                     </div>

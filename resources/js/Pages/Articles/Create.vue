@@ -27,13 +27,32 @@
 <script setup>
     import { Head, useForm } from '@inertiajs/vue3';
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+    import { onMounted } from 'vue';
+
+    const props = defineProps({
+        article: {
+            type: Object, 
+            default: null,
+        }, 
+        isUpdating: {
+            type: Boolean,
+            default: false,
+        },
+    })
 
     const form = useForm({
         title: "",
         body: "",
     });
 
-    const submit = () => {
-        form.post("/articles");
-    }
+    const submit = () => (props.isUpdating ? updatePost() : createPost());
+    const createPost = () => form.post("/articles");
+    const updatePost = () => form.put(`/articles/${ props.article.id }`);
+
+    onMounted(() => {
+        if(props.isUpdating) {
+            form.title = props.article.title;
+            form.body = props.article.body;
+        }
+    })
 </script>

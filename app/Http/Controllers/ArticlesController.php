@@ -33,4 +33,15 @@ class ArticlesController extends Controller
         return redirect()->route('articles.index');
         // TODO: flash message
     }
+
+    public function edit(Articles $article)
+    {
+        return Inertia::render('Articles/Create', ['article' => $article, 'isUpdating' => true]);
+    }
+
+    public function update(Request $request, Articles $article)
+    {
+        $article->update($request->all());
+        return redirect()->route('articles.index');
+    }
 }
